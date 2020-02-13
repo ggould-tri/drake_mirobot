@@ -32,8 +32,8 @@
 
 workspace(name = "drake_external_examples")
 
-DRAKE_COMMIT = "master"
-DRAKE_CHECKSUM = ""
+DRAKE_COMMIT = "v0.15.0"
+DRAKE_CHECKSUM = "7893bbecf4b94899a0bfa7c2c79d55c9d1886bf1d6e3b61e23e2c3b66b562094"
 
 # Or choose a specific revision of Drake to use.
 # DRAKE_COMMIT = "be4f658487f739ba04ec079de46f9459b719636d"
@@ -61,7 +61,7 @@ http_archive(
         "https://github.com/RobotLocomotion/drake/archive/{}.tar.gz",
     ]],
     sha256 = DRAKE_CHECKSUM,
-    strip_prefix = "drake-{}".format(DRAKE_COMMIT),
+    strip_prefix = "drake-{}".format(DRAKE_COMMIT.lstrip("v")),
 )
 
 # This declares the `@drake` repository as a local directory,

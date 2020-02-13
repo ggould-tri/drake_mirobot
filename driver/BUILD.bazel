@@ -1,0 +1,21 @@
+# -*- mode: python -*-
+# vi: set ft=python :
+
+cc_library(
+    name = "usb_protocol",
+    hdrs = ["usb_protocol.h"],
+    srcs = ["usb_protocol.cc"],
+    deps = [
+        "@drake//common:essential",
+        "@fmt",
+    ],
+)
+
+cc_test(
+    name = "usb_protocol_test",
+    srcs = ["test/usb_protocol_test.cc"],
+    deps = [
+        "usb_protocol",
+        "@gtest//:main",
+    ],
+)
