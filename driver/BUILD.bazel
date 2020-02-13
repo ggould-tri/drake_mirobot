@@ -11,6 +11,12 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "usb_serial_link",
+    hdrs = ["usb_serial_link.h"],
+    srcs = ["usb_serial_link.cc"],
+)
+
 cc_test(
     name = "usb_protocol_test",
     srcs = ["test/usb_protocol_test.cc"],
