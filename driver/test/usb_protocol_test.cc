@@ -16,19 +16,19 @@ GTEST_TEST(UsbProtocolTest, CheckCommandExamplesFromManual) {
             "$21=0");  // Section 2.4
 
   // Section 2.5
-  EXPECT_EQ(JointspaceMotionCommand({10, 15, 0, 0, 0, 10},
-                                    CoordinateMode::kAbsolute, 2000).ToString(),
+  EXPECT_EQ(JointspaceMotionCommand(
+      {10, 15, 0, 0, 0, 10}, CoordinateMode::kAbsolute, 2000).ToString(),
             "M21 G90 X10 Y15 C10 F2000");
 
   // Section 2.6
-  EXPECT_EQ(JointspaceMotionCommand({10, -15, 0, 0, 0, -10},
-                                    CoordinateMode::kRelative, 2000).ToString(),
+  EXPECT_EQ(JointspaceMotionCommand(
+      {10, -15, 0, 0, 0, -10}, CoordinateMode::kRelative, 2000).ToString(),
             "M21 G91 X10 Y-15 C-10 F2000");
 
   // Section 2.7
   EXPECT_EQ(CartesianMotionCommand(
-      {150, -30, 55, 0, 0, 0},
-      CoordinateMode::kAbsolute, CartesianMotionMode::kFast, 2000).ToString(),
+      {150, -30, 55, 0, 0, 0}, CoordinateMode::kAbsolute,
+      CartesianMotionMode::kFast, 2000).ToString(),
             "M20 G90 G0 X150 Y-30 Z55 A0 B0 C0 F2000");
 
   // Section 2.8
