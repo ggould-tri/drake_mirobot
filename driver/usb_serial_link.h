@@ -1,7 +1,7 @@
 #pragma once
 
-#include <optional>
 #include <string>
+#include <vector>
 
 namespace drake_mirobot {
 namespace driver {
@@ -14,6 +14,7 @@ class UsbSerialLink {
   /// Given a unique substring of a USB serial device name, construct a
   /// UsbSerialLink on that device.
   explicit UsbSerialLink(std::string device_name_substring);
+  ~UsbSerialLink();
 
   /// Writes a line, or discards it if it would block.  Newline not required.
   void WriteLine(std::string line);
@@ -23,11 +24,17 @@ class UsbSerialLink {
   /// if the stream had ended with an extra newline).
   std::string ReadLineBlocking();
 
-  /// Reads a line iff it would not block.  Newline is discarded.
-  std::optional<std::string> ReadLineNonblocking();
+  /// Reads some lines iff it would not block for long.  Returns empty if no
+  /// lines were available.  Newline characters are discarded.
+  std::vector<std::string> ReadLineNonblocking();
 
   /// True iff the remote end has disconnected.
   bool Eof();
+
+ private:
+  std::string device_path_;
+  int fd_;
+  std::string received_;  // An unnecessarily large buffer.
 };
 
 }  // namespace driver

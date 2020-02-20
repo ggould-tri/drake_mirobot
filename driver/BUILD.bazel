@@ -33,6 +33,9 @@ cc_library(
     name = "usb_serial_link",
     hdrs = ["usb_serial_link.h"],
     srcs = ["usb_serial_link.cc"],
+    deps = [
+        "@drake//common:essential",
+    ],
 )
 
 cc_library(
