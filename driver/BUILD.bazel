@@ -8,10 +8,10 @@ cc_library(
 )
 
 cc_library(
-    name = "usb_protocol",
-    hdrs = ["usb_protocol.h"],
+    name = "protocol_messages",
+    hdrs = ["protocol_messages.h"],
     srcs = [
-        "usb_protocol.cc",
+        "protocol_messages.cc",
     ],
     deps = [
         ":common",
@@ -21,10 +21,10 @@ cc_library(
 )
 
 cc_test(
-    name = "usb_protocol_test",
-    srcs = ["test/usb_protocol_test.cc"],
+    name = "protocol_messages_test",
+    srcs = ["test/protocol_messages_test.cc"],
     deps = [
-        "usb_protocol",
+        "protocol_messages",
         "@gtest//:main",
     ],
 )

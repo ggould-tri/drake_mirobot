@@ -1,4 +1,4 @@
-#include "driver/usb_protocol.h"
+#include "driver/protocol_messages.h"
 
 #include <gtest/gtest.h>
 
