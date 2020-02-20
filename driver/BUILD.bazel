@@ -2,12 +2,30 @@
 # vi: set ft=python :
 
 cc_library(
+    name = "common",
+    hdrs = ["common.h"],
+    srcs = [],
+)
+
+cc_library(
     name = "usb_protocol",
     hdrs = ["usb_protocol.h"],
-    srcs = ["usb_protocol.cc"],
+    srcs = [
+        "usb_protocol.cc",
+    ],
     deps = [
+        ":common",
         "@drake//common:essential",
         "@fmt",
+    ],
+)
+
+cc_test(
+    name = "usb_protocol_test",
+    srcs = ["test/usb_protocol_test.cc"],
+    deps = [
+        "usb_protocol",
+        "@gtest//:main",
     ],
 )
 
@@ -17,11 +35,11 @@ cc_library(
     srcs = ["usb_serial_link.cc"],
 )
 
-cc_test(
-    name = "usb_protocol_test",
-    srcs = ["test/usb_protocol_test.cc"],
+cc_library(
+    name = "mirobot_driver",
+    hdrs = ["mirobot_driver.h"],
+    srcs = ["mirobot_driver.cc"],
     deps = [
-        "usb_protocol",
-        "@gtest//:main",
+        ":common",
     ],
 )

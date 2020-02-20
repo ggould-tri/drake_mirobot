@@ -6,22 +6,25 @@
 namespace drake_mirobot {
 namespace driver {
 
-/// Slightly higher level interface to line-orient USB serial protocol of the
-/// sort mirobot uses.  Will drop data in preference to blocking.
+/// Slightly higher level interface to line-oriented USB serial protocols of
+/// the sort mirobot uses.  Will drop data in preference to blocking, because
+/// anything going over USB is an unreliable protocol anyway.
 class UsbSerialLink {
  public:
-  /// If there is exactly one USB serial device with this substring it its
-  /// name, construct a UsbSerialLink on that device.  Otherwise assert.
-  UsbSerialLink(std::string device_name_substring);
+  /// Given a unique substring of a USB serial device name, construct a
+  /// UsbSerialLink on that device.
+  explicit UsbSerialLink(std::string device_name_substring);
 
   /// Writes a line, or discards it if it would block.  Newline not required.
   void WriteLine(std::string line);
 
   /// Reads a line, blocking until one is available.  Newline is discarded.
-  std::string ReadLine();
+  /// If the stream EOFs while this is blocking, returns an empty string (as
+  /// if the stream had ended with an extra newline).
+  std::string ReadLineBlocking();
 
   /// Reads a line iff it would not block.  Newline is discarded.
-  std::optional<std::string> ReadLineBlocking();
+  std::optional<std::string> ReadLineNonblocking();
 
   /// True iff the remote end has disconnected.
   bool Eof();
